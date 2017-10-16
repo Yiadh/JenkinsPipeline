@@ -1,18 +1,22 @@
 pipeline {
-    agent master
+    agent none
     stages{
         stage("Build"){
-            echo "Building..."
-            sh 'sleep 5'
+            agent master
+            steps {
+                echo "Building..."
+                sh 'sleep 5'
+            }
+        }
+
+        stage("Test"){
+            agent node1
+            steps {
+                echo "Testing..."
+                sh 'sleep 5'
+            }
         }
     }
 
-   agent node1
-   stages{
-        stage("Test"){
-            echo "Testing..."
-            sh 'sleep 10'
-        }
-   }
 
 }
